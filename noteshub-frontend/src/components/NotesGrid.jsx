@@ -77,7 +77,7 @@ const NotesGrid = () => {
             filterednotes.map((note) => (
               <div
                 key={note.id}
-                className="bg-gray-900 shadow-lg rounded-xl p-6 hover:shadow-xl transition text-white"
+                className="bg-gray-900 shadow-lg rounded-xl p-6 hover:shadow-xl transition"
               >
                 <h3 className="text-xl font-bold mb-2 text-white">
                   {note.title}

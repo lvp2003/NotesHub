@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import NotesGrid from "./components/NotesGrid";
 import UploadPage from "./components/UploadPage"; // ✅ Adjusted path
+import BrowseNotes from "./components/BrowseNotes";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
           }
         />
         <Route path="/uploads" element={<UploadPage />} />
+        <Route path="/browse" element={<BrowseNotes />} />
       </Routes>
     </Router>
   );

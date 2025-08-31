@@ -13,7 +13,7 @@ export default function Navbar() {
             <Link to="/uploads">Upload Notes</Link>
           </li>
           <li>
-            <Link to="#">Browse Notes</Link>
+            <Link to="/browse">Browse Notes</Link>
           </li>
           <li>
             <Link to="#">Search</Link>
