@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import SearchBar from "./components/SearchBar";
 import NotesGrid from "./components/NotesGrid";
 
 const App = () => {
@@ -9,7 +8,6 @@ const App = () => {
     <>
       <Navbar></Navbar>
       <Hero></Hero>
-      <SearchBar></SearchBar>
       <NotesGrid></NotesGrid>
     </>
   );
