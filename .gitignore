@@ -1,10 +1,10 @@
 # Node modules
 noteshub-frontend/node_modules/
-# noteshub-backend/node_modules/
+noteshub-backend/node_modules/
 
 # Environment files
 noteshub-frontend/.env
-# noteshub-backend/.env
+noteshub-backend/.env
 
 # Logs
 *.log
@@ -21,8 +21,8 @@ Thumbs.db
 # Build artifacts (if applicable)
 noteshub-frontend/dist/
 noteshub-frontend/build/
-# noteshub-backend/dist/
-# noteshub-backend/build/
+noteshub-backend/dist/
+noteshub-backend/build/
 
 # Coverage reports
 coverage/
