@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Navbar() {
   return (
@@ -7,16 +7,34 @@ export default function Navbar() {
         <h1 className="text-white text-2xl font-bold">NotesHub</h1>
         <ul className="flex space-x-6 text-white">
           <li>
-            <Link to="/">Home</Link>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "text-pink-400 font-semibold" : ""
+              }
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to="/uploads">Upload Notes</Link>
+            <NavLink
+              to="/uploads"
+              className={({ isActive }) =>
+                isActive ? "text-pink-400 font-semibold" : ""
+              }
+            >
+              Upload Notes
+            </NavLink>
           </li>
           <li>
-            <Link to="/browse">Browse Notes</Link>
-          </li>
-          <li>
-            <Link to="#">Search</Link>
+            {/* <NavLink
+              to="/browse"
+              className={({ isActive }) =>
+                isActive ? "text-pink-400 font-semibold" : ""
+              }
+            >
+              Browse Notes
+            </NavLink> */}
           </li>
         </ul>
       </div>
