@@ -18,7 +18,7 @@ const UploadPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formdata);
-    alert("Upload submitted! (Backend integration pending 🚀)");
+    alert("Upload submitted!");
   };
 
   return (
