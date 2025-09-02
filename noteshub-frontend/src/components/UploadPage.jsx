@@ -1,5 +1,7 @@
-import React, { useState } from "react";
-
+import React, { useState, useRef } from "react";
+import { storage, db } from "../firebase/firebase";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { collection, addDoc } from "firebase/firestore";
 const UploadPage = () => {
   const [formData, setFormData] = useState({
     title: "",
@@ -7,7 +9,8 @@ const UploadPage = () => {
     description: "",
     file: null,
   });
-
+  const fileInputRef = useRef(null);
+  const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     setFormData({
@@ -15,11 +18,36 @@ const UploadPage = () => {
       [name]: files ? files[0] : value,
     });
   };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-    alert("Upload submitted!");
+    try {
+      setLoading(true);
+      if (!formData.file) return alert("Please select a file!");
+      // upload file to firebase storage
+      const fileReference = ref(
+        storage,
+        `notes/${Date.now()}-${formData.file.name}`
+      );
+      await uploadBytes(fileReference, formData.file);
+      // get file download url
+      const downloadURL = await getDownloadURL(fileReference);
+      // save metadata in firestore
+      await addDoc(collection(db, "notes"), {
+        title: formData.title,
+        subject: formData.subject,
+        description: formData.description,
+        fileUrl: downloadURL,
+        createdAt: new Date(),
+      });
+      alert("Note successfully");
+      setFormData({ title: "", subject: "", description: "", file: null });
+      if (fileInputRef.current) fileInputRef.current.value = "";
+    } catch (error) {
+      console.error("Error uploading file", error);
+      alert("Upload failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -85,14 +113,20 @@ const UploadPage = () => {
               accept="application/pdf"
               onChange={handleChange}
               required
+              ref={fileInputRef}
               className="w-full border border-gray-300 p-2 rounded-lg cursor-pointer"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition"
+            disabled={loading}
+            className={`w-full py-2 rounded-lg transition ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-indigo-600 hover:bg-indigo-700 text-white"
+            }`}
           >
-            Upload
+            {loading ? "Uploading..." : "Upload"}
           </button>
         </form>
       </div>
